@@ -6,119 +6,197 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gem World | دنیای جواهرات</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
 *{box-sizing:border-box}
-body{margin:0;background:#090909;color:#fff;font-family:Tahoma,Arial,sans-serif}
-header{text-align:center;padding:45px 15px;background:linear-gradient(135deg,#17120a,#080808)}
-.logo{font-size:38px;color:#e8bd57;font-weight:bold}
-header p{color:#bbb}
-nav{padding:15px;text-align:center;background:#151515;position:sticky;top:0}
-nav a{color:#e8bd57;text-decoration:none;margin:0 12px}
-.container{max-width:1100px;margin:auto;padding:25px}
-h2{color:#e8bd57}
-.intro{text-align:center;padding:20px;color:#ccc;line-height:2}
-.search{width:100%;padding:15px;border-radius:12px;border:1px solid #9d7935;background:#171717;color:white;margin:20px 0;font-size:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#171717;border:1px solid #383027;border-radius:16px;overflow:hidden;cursor:pointer;transition:.3s}
-.card:hover{transform:translateY(-7px);border-color:#e8bd57}
-.card img{width:100%;height:170px;object-fit:cover}
-.card h3{color:#e8bd57;padding:0 15px}
-.card p{color:#bbb;padding:0 15px 15px;line-height:1.8}
-button{background:#c69a3b;color:#111;border:0;padding:12px 20px;border-radius:9px;cursor:pointer;font-weight:bold}
-#detail{display:none;background:#171717;border:1px solid #9d7935;border-radius:15px;padding:20px;margin-top:25px;line-height:2}
-#detail img{width:100%;max-height:350px;object-fit:cover;border-radius:12px}
-footer{text-align:center;padding:30px;color:#888;border-top:1px solid #333;margin-top:40px}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:#090909;color:#fff;
+ font-family:Vazirmatn,Tahoma,sans-serif;
+}
+header{
+ min-height:430px;padding:35px 20px;
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;text-align:center;
+ background:linear-gradient(180deg,#17130c,#090909);
+ border-bottom:1px solid #80632b;
+}
+.logo{font-size:clamp(35px,7vw,65px);font-weight:800;color:#e9c46a;letter-spacing:2px}
+.logo span{color:white}
+header p{color:#c4b58f;font-size:16px}
+header h1{font-size:25px;margin-top:30px}
+.gold{color:#e9c46a}
+nav{
+ position:sticky;top:0;z-index:5;
+ background:#101010ed;backdrop-filter:blur(12px);
+ display:flex;justify-content:center;gap:25px;
+ padding:16px;border-bottom:1px solid #302719;
+}
+nav a{color:#e9c46a;text-decoration:none;font-size:14px}
+nav a:hover{color:white}
+.container{width:min(1150px,92%);margin:auto}
+.intro{text-align:center;padding:55px 10px 25px;line-height:2}
+.intro h2{color:#e9c46a;font-size:26px}
+.intro p{color:#aaa}
+.search{
+ width:100%;padding:17px 20px;border-radius:14px;
+ background:#171717;border:1px solid #594522;
+ color:white;font-size:15px;outline:none;
+ margin:25px 0 40px;font-family:inherit;
+}
+.search:focus{border-color:#e9c46a}
+.section-title{
+ color:#e9c46a;font-size:24px;
+ margin:35px 0 20px;
+ border-right:4px solid #e9c46a;padding-right:13px;
+}
+.grid{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:22px;margin-bottom:50px;
+}
+.card{
+ background:linear-gradient(145deg,#1c1c1c,#101010);
+ border:1px solid #30291e;border-radius:18px;
+ overflow:hidden;cursor:pointer;transition:.35s;
+}
+.card:hover{transform:translateY(-8px);border-color:#d5ad54;box-shadow:0 15px 35px #000}
+.card img{width:100%;height:190px;object-fit:cover;display:block}
+.card-content{padding:16px}
+.card h3{color:#e9c46a;margin:0 0 8px;font-size:19px}
+.card p{color:#aaa;font-size:13px;line-height:2;margin:0 0 12px}
+.more{color:#e9c46a;font-size:13px}
+#detail{
+ display:none;background:#151515;border:1px solid #80632b;
+ border-radius:20px;padding:22px;margin:30px 0 55px;
+ animation:show .3s ease;
+}
+@keyframes show{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+#detail img{width:100%;max-height:400px;object-fit:cover;border-radius:15px}
+#detail h2{color:#e9c46a;font-size:27px}
+#detail p{color:#ddd;line-height:2.2}
+button{
+ background:#e9c46a;color:#17120a;border:0;
+ border-radius:10px;padding:12px 22px;
+ font-family:inherit;font-weight:bold;cursor:pointer;
+}
+button:hover{background:white}
+footer{
+ background:#111;text-align:center;padding:35px 15px;
+ color:#888;border-top:1px solid #554321;line-height:2;
+}
+footer strong{color:#e9c46a}
+@media(max-width:500px){
+ nav{gap:15px;padding:13px 5px}
+ nav a{font-size:12px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .card img{height:135px}
+ .card-content{padding:12px}
+ .card h3{font-size:16px}
+ .card p{font-size:12px}
+}
 </style>
 </head>
 <body>
 
 <header>
-<div class="logo">💎 GEM WORLD</div>
-<p>دنیای شگفت‌انگیز فلزات گران‌بها و سنگ‌های قیمتی</p>
+ <div class="logo">GEM <span>WORLD</span> 💎</div>
+ <p>دنیایی از زیبایی، کمیابی و ارزش</p>
+ <h1>به دنیای <span class="gold">گنجینه‌های زمین</span> خوش آمدید</h1>
+ <p>زیباترین سنگ‌ها و ارزشمندترین فلزات جهان را کشف کنید.</p>
 </header>
 
 <nav>
-<a href="#">خانه</a>
-<a href="#metals">فلزات</a>
-<a href="#gems">سنگ‌های قیمتی</a>
+ <a href="#">خانه</a>
+ <a href="#metals">فلزات</a>
+ <a href="#gems">سنگ‌های قیمتی</a>
 </nav>
 
 <main class="container">
-<div class="intro">
-<h2>به دنیای جواهرات خوش آمدید!</h2>
-<p>در اینجا با زیباترین سنگ‌های قیمتی و ارزشمندترین فلزات جهان آشنا می‌شوید.</p>
-</div>
+ <section class="intro">
+  <h2>گنجینه‌های شگفت‌انگیز طبیعت</h2>
+  <p>از درخشش طلا تا زیبایی الماس؛ اینجا با دنیای شگفت‌انگیز مواد ارزشمند آشنا می‌شوید.</p>
+ </section>
 
-<input class="search" id="search" placeholder="🔍 جستجوی طلا، الماس، یاقوت و..." oninput="filterCards()">
+ <input class="search" id="search" placeholder="🔍 نام طلا، الماس، زمرد و ... را جست‌وجو کن" oninput="filterCards()">
 
-<h2 id="metals">✨ فلزات ارزشمند</h2>
-<div class="grid" id="metalGrid"></div>
+ <h2 class="section-title" id="metals">✨ فلزات ارزشمند</h2>
+ <div class="grid" id="metalGrid"></div>
 
-<h2 id="gems" style="margin-top:45px">💎 سنگ‌های قیمتی</h2>
-<div class="grid" id="gemGrid"></div>
+ <h2 class="section-title" id="gems">💎 سنگ‌های قیمتی</h2>
+ <div class="grid" id="gemGrid"></div>
 
-<section id="detail">
-<button onclick="closeDetail()">بازگشت ←</button>
-<h2 id="detailTitle"></h2>
-<img id="detailImage" alt="">
-<p id="detailText"></p>
-</section>
+ <section id="detail">
+  <button onclick="closeDetail()">← بازگشت</button>
+  <h2 id="detailTitle"></h2>
+  <img id="detailImage" alt="">
+  <p id="detailText"></p>
+  <p id="detailExtra"></p>
+ </section>
 </main>
 
-<footer>© GEM WORLD | دنیای جواهرات 💎</footer>
+<footer>
+ <strong>💎 GEM WORLD</strong>
+ <p>دنیای فلزات گران‌بها و سنگ‌های قیمتی</p>
+ © 2026 Gem World
+</footer>
 
 <script>
 const metals=[
-["طلا","فلزی زرد، درخشان و گران‌بها که در ساخت جواهرات و تجهیزات الکترونیکی استفاده می‌شود.","https://images.unsplash.com/photo-1610375461246-83df859d849d?w=700"],
-["نقره","فلزی سفید و براق با رسانایی الکتریکی بالا که در جواهرسازی کاربرد دارد.","https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=700"],
-["پلاتین","فلزی کمیاب، مقاوم و ارزشمند که در جواهرات و صنعت استفاده می‌شود.","https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=700"],
-["مس","فلزی سرخ‌رنگ و رسانا که در سیم‌های برق و صنایع مختلف کاربرد دارد.","https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700"],
-["تیتانیوم","فلزی سبک و بسیار مقاوم که در هوافضا و تجهیزات پزشکی کاربرد دارد.","https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=700"],
-["آهن","یکی از مهم‌ترین فلزات جهان که برای ساخت فولاد و ساختمان استفاده می‌شود.","https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700"],
-["برنز","آلیاژی از مس و قلع که از دوران باستان برای ابزار و مجسمه ساخته می‌شد.","https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700"],
-["اوسمیوم","فلزی بسیار کمیاب و چگال از خانواده پلاتین که کاربردهای تخصصی دارد.","https://images.unsplash.com/photo-1610375461246-83df859d849d?w=700"]
+ ["طلا","فلزی زرد، درخشان و گران‌بها که در جواهرسازی و فناوری کاربرد دارد.","عنصر طلا با نماد Au شناخته می‌شود. این فلز در برابر زنگ‌زدگی بسیار مقاوم است.","https://images.unsplash.com/photo-1610375461246-83df859d849d?w=900"],
+ ["نقره","فلزی سفید و درخشان که در ساخت زیورآلات کاربرد زیادی دارد.","نقره با نماد Ag شناخته می‌شود و رسانایی الکتریکی بسیار بالایی دارد.","https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=900"],
+ ["پلاتین","فلزی کمیاب و ارزشمند با رنگ سفید نقره‌ای.","پلاتین با نماد Pt شناخته می‌شود و در جواهرسازی و صنایع شیمیایی استفاده می‌شود.","https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900"],
+ ["مس","فلزی سرخ‌رنگ که در سیم‌های برق و صنایع کاربرد فراوان دارد.","مس با نماد Cu شناخته می‌شود و رسانای بسیار خوبی برای برق و گرما است.","https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900"],
+ ["تیتانیوم","فلزی سبک، محکم و مقاوم در برابر خوردگی.","نماد شیمیایی آن Ti است و در هوافضا و تجهیزات پزشکی استفاده می‌شود.","https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900"],
+ ["آهن","یکی از مهم‌ترین فلزات مورد استفاده بشر.","آهن با نماد Fe شناخته می‌شود و ماده اصلی تولید فولاد است.","https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900"],
+ ["برنز","آلیاژی قدیمی که بیشتر از مس و قلع ساخته می‌شود.","برنز از گذشته برای ساخت مجسمه، ابزار و وسایل تزئینی استفاده شده است.","https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900"],
+ ["اوسمیوم","فلزی بسیار کمیاب و بسیار چگال از خانواده پلاتین.","اوسمیوم با نماد Os شناخته می‌شود و کاربردهای تخصصی صنعتی دارد.","https://images.unsplash.com/photo-1610375461246-83df859d849d?w=900"]
 ];
 
 const gems=[
-["الماس","سخت‌ترین کانی طبیعی شناخته‌شده که به دلیل درخشش زیبا مشهور است.","https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700"],
-["یاقوت","سنگی قیمتی با رنگ قرمز زیبا که از خانواده کوراندوم است.","https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=700"],
-["زمرد","سنگی سبزرنگ و ارزشمند که در جواهرسازی بسیار محبوب است.","https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=700"],
-["فیروزه","سنگی آبی یا سبزآبی که از گذشته در جواهرسازی استفاده می‌شود.","https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=700"]
+ ["الماس","سنگی درخشان و بسیار سخت که از کربن ساخته شده است.","الماس سخت‌ترین کانی طبیعی شناخته‌شده است و در جواهرسازی و ابزارهای برش کاربرد دارد.","https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900"],
+ ["یاقوت","سنگی قیمتی با رنگ قرمز چشم‌نواز.","یاقوت از خانواده کوراندوم است و رنگ قرمز آن معمولاً به وجود کروم مربوط می‌شود.","https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900"],
+ ["زمرد","سنگی سبزرنگ و بسیار محبوب در جواهرسازی.","زمرد از خانواده بریل است و رنگ سبز آن به عناصر خاصی مانند کروم یا وانادیوم مربوط می‌شود.","https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=900"],
+ ["فیروزه","سنگی زیبا با رنگ آبی تا سبزآبی.","فیروزه از گذشته در ساخت انگشتر، گردنبند و آثار هنری استفاده می‌شود.","https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900"]
 ];
 
 function makeCards(items,id){
-const grid=document.getElementById(id);
-items.forEach(item=>{
-const card=document.createElement("article");
-card.className="card";
-card.dataset.name=item[0];
-card.innerHTML=`<img src="${item[2]}" alt="${item[0]}"><h3>${item[0]}</h3><p>${item[1]}</p>`;
-card.onclick=()=>showDetail(item);
-grid.appendChild(card);
-});
+ const grid=document.getElementById(id);
+ items.forEach(item=>{
+  const card=document.createElement("article");
+  card.className="card";
+  card.dataset.name=item[0];
+  card.innerHTML=`
+   <img src="${item[3]}" alt="${item[0]}" loading="lazy">
+   <div class="card-content">
+    <h3>${item[0]}</h3>
+    <p>${item[1]}</p>
+    <span class="more">مشاهده اطلاعات بیشتر ←</span>
+   </div>`;
+  card.onclick=()=>showDetail(item);
+  grid.appendChild(card);
+ });
 }
 
 function showDetail(item){
-document.getElementById("detailTitle").textContent=item[0];
-document.getElementById("detailText").textContent=item[1];
-document.getElementById("detailImage").src=item[2];
-document.getElementById("detail").style.display="block";
-document.getElementById("detail").scrollIntoView({behavior:"smooth"});
+ document.getElementById("detailTitle").textContent="✨ "+item[0];
+ document.getElementById("detailImage").src=item[3];
+ document.getElementById("detailText").textContent=item[1];
+ document.getElementById("detailExtra").textContent=item[2];
+ const detail=document.getElementById("detail");
+ detail.style.display="block";
+ detail.scrollIntoView({behavior:"smooth"});
 }
-
 function closeDetail(){
-document.getElementById("detail").style.display="none";
+ document.getElementById("detail").style.display="none";
 }
-
 function filterCards(){
-const q=document.getElementById("search").value.trim().toLowerCase();
-document.querySelectorAll(".card").forEach(card=>{
-card.style.display=card.dataset.name.toLowerCase().includes(q)?"block":"none";
-});
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ document.querySelectorAll(".card").forEach(card=>{
+  card.style.display=card.dataset.name.toLowerCase().includes(q)?"block":"none";
+ });
 }
-
 makeCards(metals,"metalGrid");
 makeCards(gems,"gemGrid");
 </script>
 </body>
 </html>
-
