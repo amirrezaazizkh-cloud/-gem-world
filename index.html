@@ -1,1 +1,124 @@
 
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gem World | دنیای جواهرات</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090909;color:#fff;font-family:Tahoma,Arial,sans-serif}
+header{text-align:center;padding:45px 15px;background:linear-gradient(135deg,#17120a,#080808)}
+.logo{font-size:38px;color:#e8bd57;font-weight:bold}
+header p{color:#bbb}
+nav{padding:15px;text-align:center;background:#151515;position:sticky;top:0}
+nav a{color:#e8bd57;text-decoration:none;margin:0 12px}
+.container{max-width:1100px;margin:auto;padding:25px}
+h2{color:#e8bd57}
+.intro{text-align:center;padding:20px;color:#ccc;line-height:2}
+.search{width:100%;padding:15px;border-radius:12px;border:1px solid #9d7935;background:#171717;color:white;margin:20px 0;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#171717;border:1px solid #383027;border-radius:16px;overflow:hidden;cursor:pointer;transition:.3s}
+.card:hover{transform:translateY(-7px);border-color:#e8bd57}
+.card img{width:100%;height:170px;object-fit:cover}
+.card h3{color:#e8bd57;padding:0 15px}
+.card p{color:#bbb;padding:0 15px 15px;line-height:1.8}
+button{background:#c69a3b;color:#111;border:0;padding:12px 20px;border-radius:9px;cursor:pointer;font-weight:bold}
+#detail{display:none;background:#171717;border:1px solid #9d7935;border-radius:15px;padding:20px;margin-top:25px;line-height:2}
+#detail img{width:100%;max-height:350px;object-fit:cover;border-radius:12px}
+footer{text-align:center;padding:30px;color:#888;border-top:1px solid #333;margin-top:40px}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">💎 GEM WORLD</div>
+<p>دنیای شگفت‌انگیز فلزات گران‌بها و سنگ‌های قیمتی</p>
+</header>
+
+<nav>
+<a href="#">خانه</a>
+<a href="#metals">فلزات</a>
+<a href="#gems">سنگ‌های قیمتی</a>
+</nav>
+
+<main class="container">
+<div class="intro">
+<h2>به دنیای جواهرات خوش آمدید!</h2>
+<p>در اینجا با زیباترین سنگ‌های قیمتی و ارزشمندترین فلزات جهان آشنا می‌شوید.</p>
+</div>
+
+<input class="search" id="search" placeholder="🔍 جستجوی طلا، الماس، یاقوت و..." oninput="filterCards()">
+
+<h2 id="metals">✨ فلزات ارزشمند</h2>
+<div class="grid" id="metalGrid"></div>
+
+<h2 id="gems" style="margin-top:45px">💎 سنگ‌های قیمتی</h2>
+<div class="grid" id="gemGrid"></div>
+
+<section id="detail">
+<button onclick="closeDetail()">بازگشت ←</button>
+<h2 id="detailTitle"></h2>
+<img id="detailImage" alt="">
+<p id="detailText"></p>
+</section>
+</main>
+
+<footer>© GEM WORLD | دنیای جواهرات 💎</footer>
+
+<script>
+const metals=[
+["طلا","فلزی زرد، درخشان و گران‌بها که در ساخت جواهرات و تجهیزات الکترونیکی استفاده می‌شود.","https://images.unsplash.com/photo-1610375461246-83df859d849d?w=700"],
+["نقره","فلزی سفید و براق با رسانایی الکتریکی بالا که در جواهرسازی کاربرد دارد.","https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=700"],
+["پلاتین","فلزی کمیاب، مقاوم و ارزشمند که در جواهرات و صنعت استفاده می‌شود.","https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=700"],
+["مس","فلزی سرخ‌رنگ و رسانا که در سیم‌های برق و صنایع مختلف کاربرد دارد.","https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700"],
+["تیتانیوم","فلزی سبک و بسیار مقاوم که در هوافضا و تجهیزات پزشکی کاربرد دارد.","https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=700"],
+["آهن","یکی از مهم‌ترین فلزات جهان که برای ساخت فولاد و ساختمان استفاده می‌شود.","https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700"],
+["برنز","آلیاژی از مس و قلع که از دوران باستان برای ابزار و مجسمه ساخته می‌شد.","https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700"],
+["اوسمیوم","فلزی بسیار کمیاب و چگال از خانواده پلاتین که کاربردهای تخصصی دارد.","https://images.unsplash.com/photo-1610375461246-83df859d849d?w=700"]
+];
+
+const gems=[
+["الماس","سخت‌ترین کانی طبیعی شناخته‌شده که به دلیل درخشش زیبا مشهور است.","https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700"],
+["یاقوت","سنگی قیمتی با رنگ قرمز زیبا که از خانواده کوراندوم است.","https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=700"],
+["زمرد","سنگی سبزرنگ و ارزشمند که در جواهرسازی بسیار محبوب است.","https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=700"],
+["فیروزه","سنگی آبی یا سبزآبی که از گذشته در جواهرسازی استفاده می‌شود.","https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=700"]
+];
+
+function makeCards(items,id){
+const grid=document.getElementById(id);
+items.forEach(item=>{
+const card=document.createElement("article");
+card.className="card";
+card.dataset.name=item[0];
+card.innerHTML=`<img src="${item[2]}" alt="${item[0]}"><h3>${item[0]}</h3><p>${item[1]}</p>`;
+card.onclick=()=>showDetail(item);
+grid.appendChild(card);
+});
+}
+
+function showDetail(item){
+document.getElementById("detailTitle").textContent=item[0];
+document.getElementById("detailText").textContent=item[1];
+document.getElementById("detailImage").src=item[2];
+document.getElementById("detail").style.display="block";
+document.getElementById("detail").scrollIntoView({behavior:"smooth"});
+}
+
+function closeDetail(){
+document.getElementById("detail").style.display="none";
+}
+
+function filterCards(){
+const q=document.getElementById("search").value.trim().toLowerCase();
+document.querySelectorAll(".card").forEach(card=>{
+card.style.display=card.dataset.name.toLowerCase().includes(q)?"block":"none";
+});
+}
+
+makeCards(metals,"metalGrid");
+makeCards(gems,"gemGrid");
+</script>
+</body>
+</html>
+
